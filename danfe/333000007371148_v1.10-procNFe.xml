@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><nfeProc versao="1.10" xmlns="http://www.portalfiscal.inf.br/nfe"><NFe xmlns="http://www.portalfiscal.inf.br/nfe"><infNFe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="NFe33101008370779000149550010000002220000008985" versao="1.10"><ide><cUF>33</cUF><cNF>000000898</cNF><natOp>VENDA</natOp><indPag>0</indPag><mod>55</mod><serie>1</serie><nNF>222</nNF><dEmi>2010-10-14</dEmi><dSaiEnt>2010-10-14</dSaiEnt><tpNF>1</tpNF><cMunFG>3304557</cMunFG><tpImp>1</tpImp><tpEmis>1</tpEmis><cDV>5</cDV><tpAmb>2</tpAmb><finNFe>1</finNFe><procEmi>0</procEmi><verProc>MAINO 1.0</verProc></ide><emit><CNPJ>08370779000149</CNPJ><xNome>MAINO SISTEMAS DE INFORMATICA</xNome><xFant>MAINO</xFant><enderEmit><xLgr>AV PRESIDENTE VARGAS</xLgr><nro>583</nro><xCpl>SL 808</xCpl><xBairro>CENTRO</xBairro><cMun>3304557</cMun><xMun>Rio de Janeiro</xMun><UF>RJ</UF><cPais>1058</cPais><xPais>BRASIL</xPais></enderEmit><IE>78205377</IE></emit><dest><CPF>05694389778</CPF><xNome>EDUARDO DOS SANTOS FERREIRA</xNome><enderDest><xLgr>CAPITAO REZENDE</xLgr><nro>35</nro><xCpl>APTO 105</xCpl><xBairro>CACHAMBI</xBairro><cMun>3304557</cMun><xMun>Rio de Janeiro</xMun><UF>RJ</UF><CEP>22051000</CEP><cPais>1058</cPais><xPais>BRASIL</xPais></enderDest><IE/></dest><det nItem="1"><prod><cProd>23782</cProd><cEAN/><xProd>TESTE</xProd><NCM>42022210</NCM><CFOP>6102</CFOP><uCom>UN</uCom><qCom>100.0000</qCom><vUnCom>9.5925</vUnCom><vProd>959.25</vProd><cEANTrib/><uTrib>UN</uTrib><qTrib>100.0000</qTrib><vUnTrib>9.5925</vUnTrib></prod><imposto><ICMS><ICMS00><orig>1</orig><CST>00</CST><modBC>3</modBC><vBC>959.25</vBC><pICMS>19.00</pICMS><vICMS>182.26</vICMS></ICMS00></ICMS><IPI><cEnq>999</cEnq><IPITrib><CST>00</CST><vBC>959.25</vBC><pIPI>10.00</pIPI><vIPI>95.92</vIPI></IPITrib></IPI><II><vBC>0.00</vBC><vDespAdu>0.00</vDespAdu><vII>0.00</vII><vIOF>0.00</vIOF></II><PIS><PISAliq><CST>01</CST><vBC>959.25</vBC><pPIS>1.65</pPIS><vPIS>15.83</vPIS></PISAliq></PIS><COFINS><COFINSAliq><CST>01</CST><vBC>959.25</vBC><pCOFINS>7.50</pCOFINS><vCOFINS>71.94</vCOFINS></COFINSAliq></COFINS></imposto></det><total><ICMSTot><vBC>959.25</vBC><vICMS>182.26</vICMS><vBCST>0.00</vBCST><vST>0.00</vST><vProd>959.25</vProd><vFrete>0.00</vFrete><vSeg>0.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>95.92</vIPI><vPIS>15.83</vPIS><vCOFINS>71.94</vCOFINS><vOutro>0.00</vOutro><vNF>1055.17</vNF></ICMSTot></total><transp><modFrete>0</modFrete><transporta><CPF>05694389778</CPF><xNome>EDUARDO DOS SANTOS FERREIRA</xNome><xMun>Rio de Janeiro</xMun><UF>RJ</UF></transporta></transp><infAdic/></infNFe><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#NFe33101008370779000149550010000002220000008985"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>ClJ356+xOjjxKxo7Yzm78EfIBeA=</DigestValue></Reference></SignedInfo><SignatureValue>PCKStQGJDRxyozaPfBfRz3rl7xuH90HWFj/50b6RhGpwtjFOylrBJ1zEICkWoK0E34JwXhOrFFt5
+eKgcPJq/XzYrtq7EYz3mkaU9dwIY08JbYt8ZSJGmsgSfqCXP85AcsHdx/mL5Aj1N9H0vjAlZbV9M
+fZg92yLRk/00gN1JKi4=</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIGFzCCBP+gAwIBAgIQMjAxMDA5MjIxMzQ1MzA0ODANBgkqhkiG9w0BAQUFADCBijELMAkGA1UE
+BhMCQlIxEzARBgNVBAoTCklDUC1CcmFzaWwxNjA0BgNVBAsTLVNlY3JldGFyaWEgZGEgUmVjZWl0
+YSBGZWRlcmFsIGRvIEJyYXNpbCAtIFJGQjEuMCwGA1UEAxMlQXV0b3JpZGFkZSBDZXJ0aWZpY2Fk
+b3JhIGRvIFNFUlBST1JGQjAeFw0xMDA5MjcxODI0MDRaFw0xMTA5MjcxODE5MTBaMIH+MQswCQYD
+VQQGEwJCUjETMBEGA1UEChMKSUNQLUJyYXNpbDE2MDQGA1UECxMtU2VjcmV0YXJpYSBkYSBSZWNl
+aXRhIEZlZGVyYWwgZG8gQnJhc2lsIC0gUkZCMRUwEwYDVQQLEwxDT05UUklCVUlOVEUxETAPBgNV
+BAsTCEFSU0VSUFJPMRYwFAYDVQQLEw1SRkIgZS1DTlBKIEExMRcwFQYDVQQHEw5SSU8gREUgSkFO
+RUlSTzELMAkGA1UECBMCUkoxOjA4BgNVBAMTMU1BSU5PIFNJU1RFTUFTIERFIElORk9STUFUSUNB
+IExUREE6MDgzNzA3NzkwMDAxNDkwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAKjEDSvop/bX
+mD9XEjzfY7VG2VT+Tcyh88cdIJwJd+ztRB8S+pLjrnJUKNyTXaZqGu4lFaHJ6CYxr7jLlJiBJMif
+ULOWN6C5nl8g+yUVwfcHknVdW528kvydkGw4I3KLTMBAOK013xUAktJjeOZz/nNMBzcvuPpoImWh
+ylU/pq5lAgMBAAGjggKFMIICgTAPBgNVHRMBAf8EBTADAQEAMB8GA1UdIwQYMBaAFLkii4YkRuei
+recpO4xoO02tdJEUMA4GA1UdDwEB/wQEAwIF4DBgBgNVHSAEWTBXMFUGBmBMAQIBCjBLMEkGCCsG
+AQUFBwIBFj1odHRwczovL2NjZC5zZXJwcm8uZ292LmJyL2Fjc2VycHJvcmZiL2RvY3MvZHBjYWNz
+ZXJwcm9yZmIucGRmMIG/BgNVHREEgbcwgbSgOAYFYEwBAwSgLwQtMTcwMTE5ODUxMDY1MzM3Mzcw
+ODAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwoC0GBWBMAQMCoCQEIkZFTElQRSBHQUJSSUVMIFNP
+TU9MSU5PUyBGRVJOQU5ERVOgGQYFYEwBAwOgEAQOMDgzNzA3NzkwMDAxNDmgFwYFYEwBAwegDgQM
+MDAwMDAwMDAwMDAwgRVwYXVsb2JldG84MEBnbWFpbC5jb20wIAYDVR0lAQH/BBYwFAYIKwYBBQUH
+AwIGCCsGAQUFBwMEMIGoBgNVHR8EgaAwgZ0wMqAwoC6GLGh0dHA6Ly9jY2Quc2VycHJvLmdvdi5i
+ci9sY3IvYWNzZXJwcm9yZmIuY3JsMDOgMaAvhi1odHRwOi8vY2NkMi5zZXJwcm8uZ292LmJyL2xj
+ci9hY3NlcnByb3JmYi5jcmwwMqAwoC6GLGh0dHA6Ly93d3cuaXRpLmdvdi5ici9zZXJwcm8vYWNz
+ZXJwcm9yZmIuY3JsMEwGCCsGAQUFBwEBBEAwPjA8BggrBgEFBQcwAoYwaHR0cDovL2NjZC5zZXJw
+cm8uZ292LmJyL2NhZGVpYXMvYWNzZXJwcm9yZmIucDdiMA0GCSqGSIb3DQEBBQUAA4IBAQArM8WB
+l1TfWDFR3WlD4FpP5uRW/70QDxPspvRbrjVLLZW9nnsDqMZibBiiuPl9dBOYAUEdX6ry/1580CsA
+BJ+O2R5ewk1PtnzGWY8y3W9xs8g6V7CvkMe/grwSLqJjn+PCdwl2Xz2ESlNgh9Vyx1BaTzufw3g7
+LkGON9331Ol6PG3w5H/Y6P3uSS9A9H1xSJl6Nw4egEP+V40XllPdwcmIY5m/TjEJKOhlnO0wsD+Y
+9Ho3KlP0aC9d4kHgXJbPQ2f0vIuWKLeo0CVwGBZSc7/e4pRO9n5KMqd7nVfS+5kjcn+vQfXgsB5i
+AFJ1Vn3m96eaIZ0vzqlHZOubLFJ+jWgd</X509Certificate></X509Data></KeyInfo></Signature></NFe><protNFe versao="1.10"><infProt Id="ID333100001301329"><tpAmb>2</tpAmb><verAplic>SVRS20101007165737</verAplic><chNFe>33101008370779000149550010000002220000008985</chNFe><dhRecbto>2010-10-14T20:36:13</dhRecbto><nProt>333100001301329</nProt><digVal>ClJ356+xOjjxKxo7Yzm78EfIBeA=</digVal><cStat>100</cStat><xMotivo>Autorizado o uso da NF-e</xMotivo></infProt></protNFe></nfeProc>

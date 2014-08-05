@@ -1971,7 +1971,7 @@ class DanfeNFePHP extends CommonNFePHP implements DocumentoNFePHP
         //NT2013.006 FCI
         $nFCI = (!empty($itemProd->getElementsByTagName('nFCI')->item(0)->nodeValue)) ? ' FCI:'.$itemProd->getElementsByTagName('nFCI')->item(0)->nodeValue : '';
 
-        $tmp_ad=$infAdProd . $medTxt . $impostos . $nFCI;
+        $tmp_ad=$infAdProd . $medTxt . $nFCI;
         $texto = $prod->getElementsByTagName("xProd")->item(0)->nodeValue . (strlen($tmp_ad)!=0?"\n    ".$tmp_ad:'');
         $texto = str_replace( ";" , "\n" , $texto );
         return $texto;
