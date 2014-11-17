@@ -1,7 +1,11 @@
 NFePHP
 =================
 
-> **OBS**: Talvez, antes de chegar aqui, você tenha encontrado o site <http://www.assembla.com/spaces/nfephp/> e talvez você esteja se perguntando qual a diferença entre o NFePHP hospedado lá e o NFePHP hospedado aqui. Veja [nossa FAQ](https://github.com/nfephp-org/nfephp/wiki/FAQ) para sanar esta dúvida.
+[![Build Status](https://travis-ci.org/nfephp-org/nfephp.svg?branch=master)](https://travis-ci.org/nfephp-org/nfephp)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nfephp-org/nfephp/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nfephp-org/nfephp/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/nfephp-org/nfephp/v/stable.svg)](https://packagist.org/packages/nfephp-org/nfephp)
+[![Latest Unstable Version](https://poser.pugx.org/nfephp-org/nfephp/v/unstable.svg)](https://packagist.org/packages/nfephp-org/nfephp)
+[![License](https://poser.pugx.org/nfephp-org/nfephp/license.svg)](https://packagist.org/packages/nfephp-org/nfephp)
 
 NFePHP é uma API para gerenciamento das comunicações entre o emitente de NFe e os serviços dos SEFAZ estaduais. Inteiramente construído em PHP para rodar sob qualquer sistema operacional.
 Para começar veja [nossas páginas Wiki](https://github.com/nfephp-org/nfephp/wiki).
@@ -11,6 +15,11 @@ Não deixe de se cadastrar no [grupo de discussão do NFePHP](http://groups.goog
 Objetivo
 -----
 A API permite que um programa emissor de NFe se comunique com a SEFAZ. A API não foi criada para ela própria emitir a NFe tendo em vista a enorme quantidade de informações necessárias e as características e especificidades de cada emitente.
+
+Licenciamento
+-----
+* LGPL v3+
+* GPL  v3+
 
 Dependências
 -------
@@ -36,7 +45,12 @@ Para mais detalhes sobre a instalação, veja <https://github.com/nfephp-org/nfe
 
 Quick start
 -----
-Clone o repositório com `git clone https://github.com/nfephp-org/nfephp.git` ou [baixe a última versão estável](https://github.com/nfephp-org/nfephp/downloads).
+Clone o repositório com `git clone --branch=develop https://github.com/nfephp-org/nfephp.git` ou [baixe a última versão estável](https://github.com/nfephp-org/nfephp/downloads).
+
+```sh
+$ composer install
+$ ./vendor/bin/phpunit
+```
 
 Versionamento
 ----------
@@ -73,8 +87,10 @@ Mantenedores
 * NFCe - `Roberto L. Machado`
 * NFSe - `Hugo Cegana`
 * CTe  - `Luciano Antony` `Roberto Spadim` 
-* MDFe - `Leandro C. LOpes`
+* MDFe - `Leandro C. Lopes`
 * CLe  - `não definido`
+
+E toda a [comunidade NFePHP](https://github.com/nfephp-org/nfephp/graphs/contributors) 
 
 Pull Request
 --------
