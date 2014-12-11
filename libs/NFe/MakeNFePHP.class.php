@@ -26,7 +26,7 @@
  * 
  * @package     NFePHP
  * @name        MakeNFePHP
- * @version     0.1.11
+ * @version     0.1.12
  * @license     http://www.gnu.org/licenses/gpl.html GNU/GPL v.3
  * @copyright   2009-2014 &copy; NFePHP
  * @link        http://www.nfephp.org/
@@ -1157,7 +1157,7 @@ class MakeNFe
      * @param string $nItem
      * @param string $nDI
      * @param string $nAdicao
-     * @param string $nSeqAdicC
+     * @param string $nSeqAdic
      * @param string $cFabricante
      * @param string $vDescDI
      * @param string $nDraw
@@ -1167,7 +1167,7 @@ class MakeNFe
         $nItem = '',
         $nDI = '',
         $nAdicao = '',
-        $nSeqAdicC = '',
+        $nSeqAdic = '',
         $cFabricante = '',
         $vDescDI = '',
         $nDraw = ''
@@ -1175,7 +1175,7 @@ class MakeNFe
         $identificador = 'I25 <adi> - ';
         $adi = $this->dom->createElement("adi");
         $this->zAddChild($adi, "nAdicao", $nAdicao, true, $identificador . "[item $nItem] Número da Adição");
-        $this->zAddChild($adi, "nSeqAdicC", $nSeqAdicC, true, $identificador . "[item $nItem] Número sequencial do item dentro da Adição");
+        $this->zAddChild($adi, "nSeqAdic", $nSeqAdic, true, $identificador . "[item $nItem] Número sequencial do item dentro da Adição");
         $this->zAddChild($adi, "cFabricante", $cFabricante, true, $identificador . "[item $nItem] Código do fabricante estrangeiro");
         $this->zAddChild($adi, "vDescDI", $vDescDI, false, $identificador . "[item $nItem] Valor do desconto do item da DI Adição");
         $this->zAddChild($adi, "nDraw", $nDraw, false, $identificador . "[item $nItem] Número do ato concessório de Drawback");
@@ -1550,7 +1550,7 @@ class MakeNFe
                 $this->zAddChild($icms, 'orig', $orig, true, "$identificador [item $nItem] Origem da mercadoria");
                 $this->zAddChild($icms, 'CST', $cst, true, "$identificador [item $nItem] Tributação do ICMS = 20");
                 $this->zAddChild($icms, 'modBC', $modBC, true, "$identificador [item $nItem] Modalidade de determinação da BC do ICMS");
-                $this->zAddChild($icms, 'pRedBC', $pRedBCST, true, "$identificador [item $nItem] Percentual da Redução de BC");
+                $this->zAddChild($icms, 'pRedBC', $pRedBC, true, "$identificador [item $nItem] Percentual da Redução de BC");
                 $this->zAddChild($icms, 'vBC', $vBC, true, "$identificador [item $nItem] Valor da BC do ICMS");
                 $this->zAddChild($icms, 'pICMS', $pICMS, true, "$identificador [item $nItem] Alíquota do imposto");
                 $this->zAddChild($icms, 'vICMS', $vICMS, true, "$identificador [item $nItem] Valor do ICMS");
@@ -1561,7 +1561,7 @@ class MakeNFe
                 $icms = $this->dom->createElement("ICMS30");
                 $this->zAddChild($icms, 'orig', $orig, true, "$identificador [item $nItem] Origem da mercadoria");
                 $this->zAddChild($icms, 'CST', $cst, true, "$identificador [item $nItem] Tributação do ICMS = 30");
-                $this->zAddChild($icms, 'modBCST', $modBC, true, "$identificador [item $nItem] Modalidade de determinação da BC do ICMS ST");
+                $this->zAddChild($icms, 'modBCST', $modBCST, true, "$identificador [item $nItem] Modalidade de determinação da BC do ICMS ST");
                 $this->zAddChild(
                     $icms,
                     'pMVAST',
@@ -1590,7 +1590,7 @@ class MakeNFe
                 $this->zAddChild($icms, 'orig', $orig, true, "$identificador [item $nItem] Origem da mercadoria");
                 $this->zAddChild($icms, 'CST', $cst, true, "$identificador [item $nItem] Tributação do ICMS = 51");
                 $this->zAddChild($icms, 'modBC', $modBC, false, "$identificador [item $nItem] Modalidade de determinação da BC do ICMS");
-                $this->zAddChild($icms, 'pRedBC', $pRedBCST, false, "$identificador [item $nItem] Percentual da Redução de BC");
+                $this->zAddChild($icms, 'pRedBC', $pRedBC, false, "$identificador [item $nItem] Percentual da Redução de BC");
                 $this->zAddChild($icms, 'vBC', $vBC, false, "$identificador [item $nItem] Valor da BC do ICMS");
                 $this->zAddChild($icms, 'pICMS', $pICMS, false, "$identificador [item $nItem] Alíquota do imposto");
                 $this->zAddChild($icms, 'vICMSOp', $vICMSOp, false, "$identificador [item $nItem] Valor do ICMS da Operação");
@@ -1609,11 +1609,11 @@ class MakeNFe
                 $this->zAddChild($icms, 'orig', $orig, true, "$identificador [item $nItem] Origem da mercadoria");
                 $this->zAddChild($icms, 'CST', $cst, true, "$identificador [item $nItem] Tributação do ICMS = 70");
                 $this->zAddChild($icms, 'modBC', $modBC, true, "$identificador [item $nItem] Modalidade de determinação da BC do ICMS");
-                $this->zAddChild($icms, 'pRedBC', $pRedBCST, true, "$identificador [item $nItem] Percentual da Redução de BC");
+                $this->zAddChild($icms, 'pRedBC', $pRedBC, true, "$identificador [item $nItem] Percentual da Redução de BC");
                 $this->zAddChild($icms, 'vBC', $vBC, true, "$identificador [item $nItem] Valor da BC do ICMS");
                 $this->zAddChild($icms, 'pICMS', $pICMS, true, "$identificador [item $nItem] Alíquota do imposto");
                 $this->zAddChild($icms, 'vICMS', $vICMS, true, "$identificador [item $nItem] Valor do ICMS");
-                $this->zAddChild($icms, 'modBCST', $modBC, true, "$identificador [item $nItem] Modalidade de determinação da BC do ICMS ST");
+                $this->zAddChild($icms, 'modBCST', $modBCST, true, "$identificador [item $nItem] Modalidade de determinação da BC do ICMS ST");
                 $this->zAddChild(
                     $icms,
                     'pMVAST',
@@ -1637,7 +1637,7 @@ class MakeNFe
                 $this->zAddChild($icms, 'pRedBC', $pRedBC, false, "$identificador [item $nItem] Percentual da Redução de BC");
                 $this->zAddChild($icms, 'pICMS', $pICMS, true, "$identificador [item $nItem] Alíquota do imposto");
                 $this->zAddChild($icms, 'vICMS', $vICMS, true, "$identificador [item $nItem] Valor do ICMS");
-                $this->zAddChild($icms, 'modBCST', $modBC, true, "$identificador [item $nItem] Modalidade de determinação da BC do ICMS ST");
+                $this->zAddChild($icms, 'modBCST', $modBCST, true, "$identificador [item $nItem] Modalidade de determinação da BC do ICMS ST");
                 $this->zAddChild(
                     $icms,
                     'pMVAST',
@@ -2038,17 +2038,17 @@ class MakeNFe
         if ($cst == '00' || $cst == '49'|| $cst == '50' || $cst == '99') {
             $ipiTrib = $this->dom->createElement('IPITrib');
             $this->zAddChild($ipiTrib, "CST", $cst, true, "[item $nItem] Código da situação tributária do IPI");
-            $this->zAddChild($ipiTrib, "vBC", $vBC, true, "[item $nItem] Valor da BC do IPI");
-            $this->zAddChild($ipiTrib, "pIPI", $pIPI, true, "[item $nItem] Alíquota do IPI");
+            $this->zAddChild($ipiTrib, "vBC", $vBC, false, "[item $nItem] Valor da BC do IPI");
+            $this->zAddChild($ipiTrib, "pIPI", $pIPI, false, "[item $nItem] Alíquota do IPI");
             $this->zAddChild(
                 $ipiTrib,
                 "qUnid",
                 $qUnid,
-                true,
+                false,
                 "[item $nItem] Quantidade total na unidade padrão para tributação "
                 . "(somente para os produtos tributados por unidade)"
             );
-            $this->zAddChild($ipiTrib, "vUnid", $vUnid, true, "[item $nItem] Valor por Unidade Tributável");
+            $this->zAddChild($ipiTrib, "vUnid", $vUnid, false, "[item $nItem] Valor por Unidade Tributável");
             $this->zAddChild($ipiTrib, "vIPI", $vIPI, true, "[item $nItem] Valor do IPI");
             $ipi->appendChild($ipiTrib);
         } else {
