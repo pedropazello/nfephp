@@ -1,6 +1,6 @@
 <?php
 
-require_once('../libs/DanfeNFePHP.class.php');
+require_once('../libs/NFe/DanfeNFePHP.class.php');
 
 $docxml = $_POST['xml'];
 $cnpj = $_POST['cnpj'];
