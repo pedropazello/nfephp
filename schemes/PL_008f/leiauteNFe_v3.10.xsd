@@ -1022,6 +1022,8 @@ Formato ”CFOP9999”.</xs:documentation>
 																		<xs:enumeration value="8"/>
 																		<xs:enumeration value="9"/>
 																		<xs:enumeration value="10"/>
+																		<xs:enumeration value="11"/>
+																		<xs:enumeration value="12"/>
 																	</xs:restriction>
 																</xs:simpleType>
 															</xs:element>
