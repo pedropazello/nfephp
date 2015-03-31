@@ -124,7 +124,7 @@ class DanfeNFePHP extends CommonNFePHP implements DocumentoNFePHP
      * Parâmetro para exibir ou ocultar o texto sobre valor aproximado dos tributos.
      * @var boolean
      */
-    public $exibirValorTributos=true;
+    public $exibirValorTributos=false;
     /**
      * Parâmetro para exibir ou ocultar o texto adicional sobre a forma de pagamento
      * e as informações de fatura/duplicata.
