@@ -192,7 +192,13 @@ class CommonNFePHP
         $aDH = explode('T', $DH);
         $adDH = explode('-', $aDH[0]);
         if( count($aDH) > 1 ){
-            $inter = explode('-', $aDH[1]);
+            if(strpos($aDH[1], '-') !== FALSE ) {
+                $inter = explode('-', $aDH[1]);
+            }else if(strpos($aDH[1], '+') !== FALSE) {
+                $inter = explode('+', $aDH[1]);
+            }else{//else adicionado para instanciar a variável $inter[0] quando $aDH[1] não passa nos testes de de busca de '-' ou '+' por não possuir informação do tomezone.
+                $inter[0] = $aDH[1];
+            }
             $atDH = explode(':', $inter[0]);
             $timestampDH = mktime($atDH[0], $atDH[1], $atDH[2], $adDH[1], $adDH[2], $adDH[0]);
         }else{

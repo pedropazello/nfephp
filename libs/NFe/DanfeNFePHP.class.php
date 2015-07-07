@@ -23,7 +23,7 @@
  *
  * @package     NFePHP
  * @name        DanfeNFePHP.class.php
- * @version     2.2.6
+ * @version     2.2.7
  * @license     http://www.gnu.org/licenses/gpl.html GNU/GPL v.3
  * @license     http://www.gnu.org/licenses/lgpl.html GNU/LGPL v.3
  * @copyright   2009-2012 &copy; NFePHP
@@ -204,7 +204,7 @@ class DanfeNFePHP extends CommonNFePHP implements DocumentoNFePHP
      * versão
      * @var string
      */
-    protected $version = '2.2.6';
+    protected $version = '2.2.7';
     /**
      * Texto
      * @var string
@@ -731,7 +731,7 @@ class DanfeNFePHP extends CommonNFePHP implements DocumentoNFePHP
         $hfooter = 5;// para rodape
         $hCabecItens = 4;//cabeçalho dos itens
         //alturas disponiveis para os dados
-        $hDispo1 = $this->hPrint - ($hcabecalho +
+        $hDispo1 = $this->hPrint - 10 - ($hcabecalho +
             $hdestinatario + ($linhasDup * $hduplicatas) + $himposto + $htransporte +
             ($linhaISSQN * $hissqn) + $hdadosadic + $hfooter + $hCabecItens +
             $this->pSizeExtraTextoFatura());
@@ -740,28 +740,27 @@ class DanfeNFePHP extends CommonNFePHP implements DocumentoNFePHP
         } else {
             $hcanhoto = $this->hPrint;//para canhoto
         }
-        $hDispo2 = $this->hPrint - ($hcabecalho + $hfooter + $hCabecItens)-4;
+        $hDispo2 = $this->hPrint - 10 - ($hcabecalho + $hfooter + $hCabecItens)-4;
         //Contagem da altura ocupada para impressão dos itens
         $fontProduto = array('font'=>$this->fontePadrao, 'size'=>7, 'style'=>'');
         $i = 0;
         $numlinhas = 0;
         $hUsado = $hCabecItens;
         $w2 = round($this->wPrint*0.31, 0);
+        $hDispo = $hDispo1 + 1;//acrecimo de 1 para comparação ficar identica à de dentro da função "pItensDANFE"
+        $totPag = 1;
         while ($i < $this->det->length) {
             $texto = $this->pDescricaoProduto($this->det->item($i));
             $numlinhas = $this->pGetNumLines($texto, $w2, $fontProduto);
-            $hUsado += round(($numlinhas * $this->pdf->FontSize)+1, 0);
+            $hUsado += round(($numlinhas * $this->pdf->FontSize) + ($numlinhas * 0.5), 2);
+            if ($hUsado > $hDispo) {
+                $totPag++;
+                $hDispo = $hDispo2;
+                $hUsado = 7;
+            }
             $i++;
         } //fim da soma das areas de itens usadas
         $qtdeItens = $i; //controle da quantidade de itens no DANFE
-        if ($hUsado > $hDispo1) {
-            //serão necessárias mais paginas
-            $hOutras = $hUsado - $hDispo1;
-            $totPag = 1 + ceil($hOutras / $hDispo2);
-        } else {
-            //sera necessaria apenas uma pagina
-            $totPag = 1;
-        }
         //montagem da primeira página
         $pag = 1;
         $x = $xInic;
@@ -820,7 +819,7 @@ class DanfeNFePHP extends CommonNFePHP implements DocumentoNFePHP
             //coloca o cabeçalho na página adicional
             $y = $this->pCabecalhoDANFE($x, $y, $n, $totPag);
             //coloca os itens na página adicional
-            $y = $this->pItensDANFE($x, $y+1, $nInicial, $hDispo2, $pag, $totPag);
+            $y = $this->pItensDANFE($x, $y+1, $nInicial, $hDispo2, $n, $totPag);
             //coloca o rodapé da página
             if ($this->orientacao == 'P') {
                 $this->pRodape($xInic, $y + 4);
@@ -855,6 +854,8 @@ class DanfeNFePHP extends CommonNFePHP implements DocumentoNFePHP
         if ($cdata == '') {
             return '';
         }
+		return $cdata;
+		
         //remove qualquer texto antes ou depois da tag CDATA
         $cdata = str_replace('<![CDATA[', '<CDATA>', $cdata);
         $cdata = str_replace(']]>', '</CDATA>', $cdata);
@@ -2253,7 +2254,7 @@ class DanfeNFePHP extends CommonNFePHP implements DocumentoNFePHP
         $texto = 'QUANTIDADE';
         $aFont = array('font'=>$this->fontePadrao, 'size'=>6, 'style'=>'');
         $this->pTextBox($x, $y, $w1, $h, $texto, $aFont, 'T', 'L', 1, '');
-        if(!empty($quantidade)){
+        if (!empty($quantidade)) {
             $texto = $quantidade;
             $aFont = array('font'=>$this->fontePadrao, 'size'=>10, 'style'=>'B');
             $this->pTextBox($x, $y, $w1, $h, $texto, $aFont, 'B', 'C', 0, '');
@@ -2374,10 +2375,50 @@ class DanfeNFePHP extends CommonNFePHP implements DocumentoNFePHP
                 $medTxt.= ' ';
             }
         }
+        $veicProdTxt='';
+        $veicProd = $prod->getElementsByTagName("veicProd");
+        if(isset($veicProd)){
+            $i = 0;
+            while($i < $veicProd->length) {
+                $iVeicProd = $veicProd->item($i);
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'tpOp' , ";Operacao: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'chassi' , ";Chassi: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'cCor'  , ";Cod Cor: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'xCor'  , ";Desc Cor: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'pot'  , ";Pot Motor (CV): ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'cilin'  , ";Cilindradas: ");
+                $pesoLiquido = isset($iVeicProd->getElementsByTagName("pesoL")->item(0)->nodeValue) ? $iVeicProd->getElementsByTagName("pesoL")->item(0)->nodeValue : 0;
+                $pesoLiquido = number_format($pesoLiquido, 3, ",", ".");
+                $veicProdTxt .= ";Peso Liq (t): $pesoLiquido";
+                $pesoBruto = isset($iVeicProd->getElementsByTagName("pesoB")->item(0)->nodeValue) ? $iVeicProd->getElementsByTagName("pesoB")->item(0)->nodeValue : 0;
+                $pesoBruto = number_format($pesoBruto, 3, ",", ".");
+                $veicProdTxt .= ";Peso Brut (t): $pesoBruto";
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'nSerie'  , ";Serie: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'tpComb'  , ";Combustivel: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'nMotor'  , ";Num Motor: ");
+                $tracao = isset($iVeicProd->getElementsByTagName("CMT")->item(0)->nodeValue) ? $iVeicProd->getElementsByTagName("CMT")->item(0)->nodeValue : 0;
+                $tracao = number_format($tracao, 3, ",", ".");
+                $veicProdTxt .= ";Cap Max Tracao (t): $tracao";
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'dist'  , ";Dist Eixos: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'anoMod'  , ";Ano Modelo: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'anoFab'  , ";Ano Fabric: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'tpPint'  , ";Tipo Pintura: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'tpVeic'  , ";Tipo Veiculo: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'espVeic'  , ";Esp Veiculo: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'VIN'  , ";Cond VIN: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'condVeic'  , ";Cond Veiculo: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'cMod'  , ";Cod Marca Modelo: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'cCorDENATRAN'  , ";Codigo Cor: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'lota'  , ";Cap Max Lotacao: ");
+                $veicProdTxt .= $this->pSimpleGetValue($veicProd->item($i) , 'tpRest'  , ";Restricao: ");
+                $i++;
+            }
+            if(!empty($veicProdTxt)) $veicProdTxt.= ' ';
+        }
         //NT2013.006 FCI
         $nFCI = (! empty($itemProd->getElementsByTagName('nFCI')->item(0)->nodeValue)) ?
                 ' FCI:'.$itemProd->getElementsByTagName('nFCI')->item(0)->nodeValue : '';
-        $tmp_ad=$infAdProd . ($this->descProdInfoComplemento ? $medTxt . $impostos . $nFCI : '');
+        $tmp_ad=$infAdProd . ($this->descProdInfoComplemento ? $veicProdTxt . $medTxt . $impostos . $nFCI : '');
         $texto = $prod->getElementsByTagName("xProd")->item(0)->nodeValue . (strlen($tmp_ad)!=0?"\n    ".$tmp_ad:'');
         if ($this->descProdQuebraLinha) {
             $texto = str_replace(";", "\n", $texto);
@@ -2536,13 +2577,15 @@ class DanfeNFePHP extends CommonNFePHP implements DocumentoNFePHP
                 $IPI  = $imposto->getElementsByTagName("IPI")->item(0);
                 $textoProduto = $this->pDescricaoProduto($thisItem);
                 $linhaDescr = $this->pGetNumLines($textoProduto, $w2, $aFont);
-                $h = round(($linhaDescr * $this->pdf->FontSize)+1, 0);
+                $h = round(($linhaDescr * $this->pdf->FontSize)+ ($linhaDescr * 0.5), 2);
                 $hUsado += $h;
-                if ($hUsado >= $hmax && $i < $totItens) {
-                    //ultrapassa a capacidade para uma única página
-                    //o restante dos dados serão usados nas proximas paginas
-                    $nInicio = $i;
-                    break;
+                if ($pag != $totpag) {
+                    if ($hUsado >= $hmax && $i < $totItens) {
+                        //ultrapassa a capacidade para uma única página
+                        //o restante dos dados serão usados nas proximas paginas
+                        $nInicio = $i;
+                        break;
+                    }
                 }
                 $y_linha=$y+$h;
                 // linha entre itens
@@ -2653,12 +2696,12 @@ class DanfeNFePHP extends CommonNFePHP implements DocumentoNFePHP
                 }
                 $this->pTextBox($x, $y, $w14, $h, $texto, $aFont, 'T', 'C', 0, '');
                 $y += $h;
-                $i++;
+
                 //incrementa o controle dos itens processados.
                 $this->qtdeItensProc++;
-            } else {
-                $i++;
             }
+
+            $i++;
         }
         return $oldY+$hmax;
     } // fim itensDANFE

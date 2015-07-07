@@ -601,6 +601,12 @@ class CTeNFePHP
             $this->dactefont = $aConfig['dacteFonte'];
             $this->dacteprinter = $aConfig['dactePrinter'];
             $this->cteSchemeVer = $aConfig['schemesCTe'];
+            if (isset($aConfig['certsDir'])) {
+                $this->certsDir =  $aConfig['certsDir'];
+            }
+            if (isset($aConfig['imgDir'])) {
+                $this->imgDir =  $aConfig['imgDir'];
+            }
             if (isset($aConfig['arquivoURLxmlCTe'])) {
                 $this->xmlURLfile = $aConfig['arquivoURLxmlCTe'];
             }
@@ -652,6 +658,12 @@ class CTeNFePHP
                 $this->dactefont = $dacteFonte;
                 $this->dacteprinter = $dactePrinter;
                 $this->cteSchemeVer = $schemesCTe;
+                if (isset($certsDir)) {
+                    $this->certsDir =  $certsDir;
+                }
+                if (isset($imgDir)) {
+                    $this->imgDir =  $imgDir;
+                }
                 if (isset($arquivoURLxmlCTe)) {
                     $this->xmlURLfile = $arquivoURLxmlCTe;
                 }
@@ -689,10 +701,14 @@ class CTeNFePHP
         $this->anoMes = date('Ym');
         //carrega o caminho para os schemas
         $this->xsdDir = $this->raizDir . 'schemes'. DIRECTORY_SEPARATOR;
-        //carrega o caminho para os certificados
-        $this->certsDir =  $this->raizDir . 'certs'. DIRECTORY_SEPARATOR;
-        //carrega o caminho para as imagens
-        $this->imgDir =  $this->raizDir . 'images'. DIRECTORY_SEPARATOR;
+        //carrega o caminho para os certificados caso não tenha sido passado por config
+        if (empty($this->certsDir)) {
+            $this->certsDir =  $this->raizDir.'certs'. DIRECTORY_SEPARATOR;
+        }
+        //carrega o caminho para as imagens caso não tenha sido passado por config
+        if (empty($this->imgDir)) {
+            $this->imgDir =  $this->raizDir.'images'. DIRECTORY_SEPARATOR;
+        }
         // Verifica o ultimo caracter da variável $arqDir
         // se não for um DIRECTORY_SEPARATOR então colocar um
         if (substr($this->arqDir, -1, 1) != DIRECTORY_SEPARATOR) {
@@ -945,7 +961,7 @@ class CTeNFePHP
             if (!isset($Signature)) {
                 // remove o erro de falta de assinatura
                 foreach ($aIntErrors as $k => $intError) {
-                    if (strpos($intError->message, '({http://www.w3.org/2000/09/xmldsig#}Signature)') !== false) {
+                    if (strpos($intError->message, '( {http://www.w3.org/2000/09/xmldsig#}Signature )') !== false) {
                         // remove o erro da assinatura, se tiver outro meio melhor
                         // (atraves dos erros de codigo) e alguem souber como tratar por eles,
                         // por favor contribua...
@@ -1384,7 +1400,7 @@ class CTeNFePHP
      * ["dhRetorno"] =>  string(0)  ""
      * }
     **/
-    public function statusServico($UF = '', $tpAmb = '')
+    public function statusServico($UF = '', $tpAmb = '', &$aRetorno='')
     {
         // Retorno da funçao
         $aRetorno = array('bStat' => false,'cStat' => '','tMed'  => '','dhRecbto' => '','xMotivo' => '','xObs' => '');
@@ -1470,7 +1486,7 @@ class CTeNFePHP
             $this->errMsg = 'Nao houve retorno Soap verifique a mensagem de erro e o debug!!';
             $aRetorno = false;
         }
-        return $aRetorno;
+        return $retorno;
     } // Fim statusServico
 
     /**
@@ -1487,10 +1503,10 @@ class CTeNFePHP
      * @param   string  $tpAmb
      * @return    mixed false se falha ou array se retornada informação
      **/
-    public function consultaCadastro($UF, $CNPJ = '', $IE = '', $CPF = '', $tpAmp = '')
+    public function consultaCadastro($UF, $CNPJ = '', $IE = '', $CPF = '', $tpAmb = '', &$aRetorno='')
     {
         // Variavel de retorno do metodo
-        $aRetorno = array('bStat' => false,'cStat' => '','dados' => array());
+        $aRetorno = array('bStat' => false, 'cStat' => '', 'dados' => array());
         $flagIE = false;
         $flagCNPJ = false;
         $flagCPF = false;
@@ -1560,8 +1576,7 @@ class CTeNFePHP
                 . '" versao="' . $versao . '"><infCons><xServ>CONS-CAD</xServ><uf>' . $UF
                 . '</uf>' . $filtro . '</infCons></consCad><cteDadosMsg>';
         // Envia a solicitação via SOAP
-        $retorno = $this->zSendSOAP($urlservico, $namespace, $cabec, $dados, $metodo, $tpAmb);
-        return $aRetorno;
+        return $this->zSendSOAP($urlservico, $namespace, $cabec, $dados, $metodo, $tpAmb);
     } //Fim consultaCadastro
 
     /**
@@ -2296,6 +2311,7 @@ class CTeNFePHP
             $eventId = "ID".$tpEvento.$chCTe.$zenSeqEvento;
             //monta mensagem
             $Ev = '';
+            $Ev .= "<eventoCTe xmlns=\"$this->URLPortal\" versao=\"$versao\">";
             $Ev .= "<infEvento Id=\"$eventId\">";
             $Ev .= "<cOrgao>$this->cUF</cOrgao>";
             $Ev .= "<tpAmb>$tpAmb</tpAmb>";
@@ -2304,7 +2320,7 @@ class CTeNFePHP
             $Ev .= "<dhEvento>$dhEvento</dhEvento>";
             $Ev .= "<tpEvento>$tpEvento</tpEvento>";
             $Ev .= "<nSeqEvento>$nSeqEvento</nSeqEvento>";
-            $Ev .= "<detEvento versao=\"$versao\">";
+            $Ev .= "<detEvento versaoEvento=\"$versao\">";
             $Ev .= "<evCCeCTe>";
             $Ev .= "<descEvento>$descEvento</descEvento>";
             $IEv = '';
@@ -2327,16 +2343,11 @@ class CTeNFePHP
             }
 
             $Ev .= $IEv;
-            $Ev .= "</evCCeCTe></detEvento></infEvento>";
+            $Ev .= "</evCCeCTe></detEvento></infEvento></eventoCTe>";
             //assinatura dos dados
             $tagid = 'infEvento';
-            $Ev = $this->signXML($Ev, $tagid);
+            $dados = $this->signXML($Ev, $tagid);
             //carrega uma matriz temporária com os eventos assinados
-            //montagem dos dados
-            $dados = '';
-            $dados .= "<eventoCTe xmlns=\"$this->URLPortal\" versao=\"$versao\">";
-            $dados .= $Ev;
-            $dados .= "</eventoCTe>";
             //montagem da mensagem
             $cabec = "<cteCabecMsg xmlns=\"$namespace\"><cUF>$this->cUF</cUF>"
                     . "<versaoDados>$versao</versaoDados></cteCabecMsg>";
