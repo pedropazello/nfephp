@@ -2594,7 +2594,7 @@ class DanfeNFePHP extends CommonNFePHP implements DocumentoNFePHP
                 $x=$oldX;
                 //codigo do produto
                 $texto = $prod->getElementsByTagName("cProd")->item(0)->nodeValue;
-                $this->pTextBox($x, $y, $w1, $h, $texto, $aFont, 'T', 'C', 0, '');
+                $this->pTextBox($x, $y, $w1, $h, $texto, $aFont, 'T', 'C', 0, '', false);
                 $x += $w1;
                 //DESCRIÇÃO
                 if ($this->orientacao == 'P') {
