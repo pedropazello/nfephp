@@ -2577,7 +2577,13 @@ class DanfeNFePHP extends CommonNFePHP implements DocumentoNFePHP
                 $IPI  = $imposto->getElementsByTagName("IPI")->item(0);
                 $textoProduto = $this->pDescricaoProduto($thisItem);
                 $linhaDescr = $this->pGetNumLines($textoProduto, $w2, $aFont);
-                $h = round(($linhaDescr * $this->pdf->FontSize)+ ($linhaDescr * 0.5), 2);
+                $textoCodigo = $prod->getElementsByTagName("cProd")->item(0)->nodeValue;
+                $linhaCod = $this->pGetNumLines($textoCodigo, $w2, $aFont);
+                if ($linhaDescr > $linhaCod) {
+                    $h = round(($linhaDescr * $this->pdf->FontSize)+ ($linhaDescr * 0.5), 2);
+                } else {
+                    $h = round(($linhaCod * $this->pdf->FontSize)+ ($linhaCod * 0.5), 2);
+                }
                 $hUsado += $h;
                 if ($pag != $totpag) {
                     if ($hUsado >= $hmax && $i < $totItens) {
